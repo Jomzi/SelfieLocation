@@ -9,10 +9,12 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <CaptureElement x:Name = "PreviewControl" HorizontalAlignment="Left" Height="146" Margin="58,124,0,0" VerticalAlignment="Top" Width="238"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="257,57,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="snapButton" Content="Button" HorizontalAlignment="Left" Margin="142,554,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.031,-0.344" Click="snapButton_Click"/>
+        <Image x:Name = "StillImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="146" Margin="58,124,0,0" VerticalAlignment="Top" Width="238"/>
+        <Button x:Name="snapButton" Content="Capture" HorizontalAlignment="Left" Margin="142,554,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.031,-0.344" Click="snapButton_Click"/>
         <TextBox x:Name="chatBox" HorizontalAlignment="Left" Margin="58,305,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Height="59" Width="238"/>
         <Button x:Name="sendButton" Content="Send" HorizontalAlignment="Left" Margin="58,483,0,0" VerticalAlignment="Top" Width="238" Click="sendButton_Click"/>
+        <Button x:Name="GetGeolocationButton" Content="Button" HorizontalAlignment="Left" Margin="58,409,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.55,2.821" Click="GetGeolocationButton_Click"/>
+        <Button x:Name="CancelGetGeolocationButton" Content="Button" HorizontalAlignment="Left" Margin="207,409,0,0" VerticalAlignment="Top" Click="CancelGetGeolocationButton_Click"/>
 
     </Grid>
 </Page>
