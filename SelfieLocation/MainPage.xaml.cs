@@ -72,9 +72,20 @@ namespace SelfieLocation
 
             
         }
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e )
         {
+            String locationInfo = " ";
+            if (e.Parameter is Location)
+            {
+                Location location = e.Parameter as Location;
+               locationInfo= String.Format("I'm here: \n https://www.google.ie/maps/@{0:N7},{1:N7},20z", location.Latitude, location.Longitude);
+
+            }
+            
+            chatBox.Text += "\n\n " + locationInfo; 
+           
             await InitializeCameraAsync();
+
         }
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
@@ -321,80 +332,24 @@ namespace SelfieLocation
 
         }
 
-        async private void GetGeolocationButton_Click(object sender, RoutedEventArgs e)
+        private void GetGeolocationButton_Click(object sender, RoutedEventArgs e)
         
         {
-            GetGeolocationButton.IsEnabled = false;
-            CancelGetGeolocationButton.IsEnabled = true;
+            //{
+              //  this.Frame.Navigate(typeof(BlankPage1));
+            //}
+            
             //LocationDisabledMessage.Visibility = Visibility.Collapsed;
 
-            try
-            {
-                // Request permission to access location
-                var accessStatus = await Geolocator.RequestAccessAsync();
+            
 
-                switch (accessStatus)
-                {
-                    case GeolocationAccessStatus.Allowed:
+            
+           
+            this.Frame.Navigate(typeof(BlankPage1));
 
-                        // Get cancellation token
-                        _cts = new CancellationTokenSource();
-                        CancellationToken token = _cts.Token;
-
-                        //_rootPage.NotifyUser("Waiting for update...", NotifyType.StatusMessage);
-
-                        // If DesiredAccuracy or DesiredAccuracyInMeters are not set (or value is 0), DesiredAccuracy.Default is used.
-                        Geolocator geolocator = new Geolocator { DesiredAccuracyInMeters = _desireAccuracyInMetersValue };
-
-                        // Carry out the operation
-                        Geoposition pos = await geolocator.GetGeopositionAsync().AsTask(token);
-
-                        /* UpdateLocationData(pos);
-                         _rootPage.NotifyUser("Location updated.", NotifyType.StatusMessage);
-                         break;
-
-                     case GeolocationAccessStatus.Denied:
-                         _rootPage.NotifyUser("Access to location is denied.", NotifyType.ErrorMessage);
-                         LocationDisabledMessage.Visibility = Visibility.Visible;
-                         UpdateLocationData(null);
-                         break;
-
-                     case GeolocationAccessStatus.Unspecified:
-                         _rootPage.NotifyUser("Unspecified error.", NotifyType.ErrorMessage);
-                         UpdateLocationData(null);
-                         break;
-                         */
-                        break;
-                }
-            }
-            catch (TaskCanceledException)
-            {
-               // _rootPage.NotifyUser("Canceled.", NotifyType.StatusMessage);
-            }
-            catch (Exception ex)
-            {
-               // _rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-            }
-            finally
-            {
-                _cts = null;
-            }
-
-            GetGeolocationButton.IsEnabled = true;
-            CancelGetGeolocationButton.IsEnabled = false;
         }
 
-        private void CancelGetGeolocationButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_cts != null)
-            {
-                _cts.Cancel();
-                _cts = null;
-            }
-
-            GetGeolocationButton.IsEnabled = true;
-            CancelGetGeolocationButton.IsEnabled = false;
-        }
+        
 
         
     }
